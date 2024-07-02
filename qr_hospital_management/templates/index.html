@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Patients List</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Condition</th>
+            <th>QR Code</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for patient in patients %}
+        <tr>
+            <td>{{ patient.name }}</td>
+            <td>{{ patient.age }}</td>
+            <td>{{ patient.condition }}</td>
+            <td><img src="{{ url_for('main.generate_qrcode', text=url_for('main.view_patient', patient_id=patient.id, _external=True)) }}" alt="QR Code"></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
